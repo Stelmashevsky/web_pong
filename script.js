@@ -123,7 +123,6 @@ paddle1DownButton.addEventListener("touchstart", () => {
 paddle1DownButton.addEventListener("touchend", () => {
   paddle1Down = false;
 });
-
 // Mouse events for desktop
 paddle1UpButton.addEventListener("mousedown", () => {
   paddle1Up = true;
