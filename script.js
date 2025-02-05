@@ -1,13 +1,13 @@
 const canvas = document.getElementById('game');
 const context = canvas.getContext('2d');
 
-// Dynamically set canvas size based on screen size
-// function resizeCanvas() {
-//   canvas.width = window.innerWidth * 0.9; // 90% of screen width
-//   canvas.height = window.innerHeight * 0.8; // 80% of screen height
-// }
-// resizeCanvas();
-// window.addEventListener('resize', resizeCanvas);
+// Dynamically set canvas size based on Telegram Mini App viewport
+function resizeCanvas() {
+  canvas.width = window.innerWidth; // Full width of the Telegram Mini App
+  canvas.height = window.innerHeight; // Full height of the Telegram Mini App
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
 
 // Grid size and paddle/ball dimensions (relative to canvas size)
 const grid = Math.floor(canvas.width * 0.02); // 2% of canvas width
@@ -127,14 +127,22 @@ function loop() {
   }
 }
 
-// Keyboard controls for the player's paddle
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'w') leftPaddle.dy = -paddleSpeed; // Move up
-  if (e.key === 's') leftPaddle.dy = paddleSpeed; // Move down
+// Touch controls for mobile
+const upButton = document.getElementById('up');
+const downButton = document.getElementById('down');
+
+upButton.addEventListener('touchstart', () => {
+  leftPaddle.dy = -paddleSpeed; // Move up
+});
+upButton.addEventListener('touchend', () => {
+  leftPaddle.dy = 0; // Stop moving
 });
 
-document.addEventListener('keyup', (e) => {
-  if (e.key === 'w' || e.key === 's') leftPaddle.dy = 0; // Stop moving
+downButton.addEventListener('touchstart', () => {
+  leftPaddle.dy = paddleSpeed; // Move down
+});
+downButton.addEventListener('touchend', () => {
+  leftPaddle.dy = 0; // Stop moving
 });
 
 // Start the game
