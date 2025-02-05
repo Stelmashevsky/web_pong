@@ -123,19 +123,19 @@ paddle1DownButton.addEventListener("touchstart", () => {
 paddle1DownButton.addEventListener("touchend", () => {
   paddle1Down = false;
 });
-// Mouse events for desktop
-paddle1UpButton.addEventListener("mousedown", () => {
-  paddle1Up = true;
-});
-paddle1UpButton.addEventListener("mouseup", () => {
-  paddle1Up = false;
-});
+// // Mouse events for desktop
+// paddle1UpButton.addEventListener("mousedown", () => {
+//   paddle1Up = true;
+// });
+// paddle1UpButton.addEventListener("mouseup", () => {
+//   paddle1Up = false;
+// });
 
-paddle1DownButton.addEventListener("mousedown", () => {
-  paddle1Down = true;
-});
-paddle1DownButton.addEventListener("mouseup", () => {
-  paddle1Down = false;
-});
+// paddle1DownButton.addEventListener("mousedown", () => {
+//   paddle1Down = true;
+// });
+// paddle1DownButton.addEventListener("mouseup", () => {
+//   paddle1Down = false;
+// });
 // Start the game
 gameLoop();
