@@ -19,7 +19,7 @@ const ballSize = grid; // Ball size is 1 grid unit
 const paddleSpeed = Math.floor(canvas.height * 0.01); // 1% of canvas height
 const ballSpeed = Math.floor(canvas.width * 0.005); // 0.5% of canvas width
 
-// Left paddle
+// Left paddle (controlled by player)
 const leftPaddle = {
   x: grid * 2,
   y: canvas.height / 2 - paddleHeight / 2,
@@ -28,7 +28,7 @@ const leftPaddle = {
   dy: 0 // Paddle velocity
 };
 
-// Right paddle
+// Right paddle (controlled by AI)
 const rightPaddle = {
   x: canvas.width - grid * 3,
   y: canvas.height / 2 - paddleHeight / 2,
@@ -61,12 +61,21 @@ function loop() {
   requestAnimationFrame(loop);
   context.clearRect(0, 0, canvas.width, canvas.height);
 
-  // Move paddles
+  // Move player's paddle
   leftPaddle.y += leftPaddle.dy;
-  rightPaddle.y += rightPaddle.dy;
 
-  // Prevent paddles from going out of bounds
+  // Prevent player's paddle from going out of bounds
   leftPaddle.y = Math.max(grid, Math.min(leftPaddle.y, maxPaddleY));
+
+  // AI paddle logic: follow the ball
+  const paddleCenter = rightPaddle.y + rightPaddle.height / 2;
+  if (paddleCenter < ball.y) {
+    rightPaddle.y += paddleSpeed; // Move down
+  } else if (paddleCenter > ball.y) {
+    rightPaddle.y -= paddleSpeed; // Move up
+  }
+
+  // Prevent AI paddle from going out of bounds
   rightPaddle.y = Math.max(grid, Math.min(rightPaddle.y, maxPaddleY));
 
   // Draw paddles
@@ -118,17 +127,14 @@ function loop() {
   }
 }
 
-// Keyboard controls
+// Keyboard controls for the player's paddle
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'ArrowUp') rightPaddle.dy = -paddleSpeed;
-  if (e.key === 'ArrowDown') rightPaddle.dy = paddleSpeed;
-  if (e.key === 'w') leftPaddle.dy = -paddleSpeed;
-  if (e.key === 's') leftPaddle.dy = paddleSpeed;
+  if (e.key === 'w') leftPaddle.dy = -paddleSpeed; // Move up
+  if (e.key === 's') leftPaddle.dy = paddleSpeed; // Move down
 });
 
 document.addEventListener('keyup', (e) => {
-  if (e.key === 'ArrowUp' || e.key === 'ArrowDown') rightPaddle.dy = 0;
-  if (e.key === 'w' || e.key === 's') leftPaddle.dy = 0;
+  if (e.key === 'w' || e.key === 's') leftPaddle.dy = 0; // Stop moving
 });
 
 // Start the game
