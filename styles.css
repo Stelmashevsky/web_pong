@@ -19,7 +19,7 @@ canvas {
 .controls {
   display: flex;
   justify-content: space-between;
-  width: 100%;
+  width: 90%; /* Adjust width dynamically */
   max-width: 600px;
   margin-top: 10px;
 }
