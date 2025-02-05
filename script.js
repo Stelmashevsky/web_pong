@@ -1,9 +1,13 @@
 const canvas = document.getElementById("pongCanvas");
 const ctx = canvas.getContext("2d");
 
+// Set canvas size dynamically based on screen size
+canvas.width = window.innerWidth * 0.9; // 90% of screen width
+canvas.height = window.innerHeight * 0.6; // 60% of screen height
+
 // Game variables
 const paddleWidth = 10;
-const paddleHeight = 80;
+const paddleHeight = canvas.height / 5; // Paddle height scales with screen size
 const ballSize = 10;
 
 // Paddle positions
@@ -101,18 +105,37 @@ function gameLoop() {
   requestAnimationFrame(gameLoop);
 }
 
-// Event listeners for smooth paddle movement
-document.getElementById("paddle1Up").addEventListener("mousedown", () => {
+// Event listeners for smooth paddle movement (mobile and desktop)
+const paddle1UpButton = document.getElementById("paddle1Up");
+const paddle1DownButton = document.getElementById("paddle1Down");
+
+// Touch events for mobile
+paddle1UpButton.addEventListener("touchstart", () => {
   paddle1Up = true;
 });
-document.getElementById("paddle1Up").addEventListener("mouseup", () => {
+paddle1UpButton.addEventListener("touchend", () => {
   paddle1Up = false;
 });
 
-document.getElementById("paddle1Down").addEventListener("mousedown", () => {
+paddle1DownButton.addEventListener("touchstart", () => {
   paddle1Down = true;
 });
-document.getElementById("paddle1Down").addEventListener("mouseup", () => {
+paddle1DownButton.addEventListener("touchend", () => {
+  paddle1Down = false;
+});
+
+// Mouse events for desktop
+paddle1UpButton.addEventListener("mousedown", () => {
+  paddle1Up = true;
+});
+paddle1UpButton.addEventListener("mouseup", () => {
+  paddle1Up = false;
+});
+
+paddle1DownButton.addEventListener("mousedown", () => {
+  paddle1Down = true;
+});
+paddle1DownButton.addEventListener("mouseup", () => {
   paddle1Down = false;
 });
 // Start the game
