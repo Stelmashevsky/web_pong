@@ -1,13 +1,13 @@
 const canvas = document.getElementById('game');
 const context = canvas.getContext('2d');
 
-// Dynamically set canvas size based on Telegram Mini App viewport
-function resizeCanvas() {
-  canvas.width = window.innerWidth; // Full width of the Telegram Mini App
-  canvas.height = window.innerHeight; // Full height of the Telegram Mini App
-}
-resizeCanvas();
-window.addEventListener('resize', resizeCanvas);
+// // Dynamically set canvas size based on Telegram Mini App viewport
+// function resizeCanvas() {
+//   canvas.width = window.innerWidth; // Full width of the Telegram Mini App
+//   canvas.height = window.innerHeight; // Full height of the Telegram Mini App
+// }
+// resizeCanvas();
+// window.addEventListener('resize', resizeCanvas);
 
 // Grid size and paddle/ball dimensions (relative to canvas size)
 const grid = Math.floor(canvas.width * 0.02); // 2% of canvas width
