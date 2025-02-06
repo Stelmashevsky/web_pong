@@ -131,19 +131,39 @@ function loop() {
 const upButton = document.getElementById('up');
 const downButton = document.getElementById('down');
 
-upButton.addEventListener('touchstart', () => {
+// Add touch event listeners
+upButton.addEventListener('touchstart', (e) => {
+  e.preventDefault(); // Prevent default behavior
   leftPaddle.dy = -paddleSpeed; // Move up
 });
-upButton.addEventListener('touchend', () => {
+upButton.addEventListener('touchend', (e) => {
+  e.preventDefault(); // Prevent default behavior
   leftPaddle.dy = 0; // Stop moving
 });
 
-downButton.addEventListener('touchstart', () => {
+downButton.addEventListener('touchstart', (e) => {
+  e.preventDefault(); // Prevent default behavior
   leftPaddle.dy = paddleSpeed; // Move down
 });
-downButton.addEventListener('touchend', () => {
+downButton.addEventListener('touchend', (e) => {
+  e.preventDefault(); // Prevent default behavior
   leftPaddle.dy = 0; // Stop moving
 });
+
+// // Add mouse event listeners for desktop testing
+// upButton.addEventListener('mousedown', () => {
+//   leftPaddle.dy = -paddleSpeed; // Move up
+// });
+// upButton.addEventListener('mouseup', () => {
+//   leftPaddle.dy = 0; // Stop moving
+// });
+
+// downButton.addEventListener('mousedown', () => {
+//   leftPaddle.dy = paddleSpeed; // Move down
+// });
+// downButton.addEventListener('mouseup', () => {
+//   leftPaddle.dy = 0; // Stop moving
+// });
 
 // Start the game
 loop();
